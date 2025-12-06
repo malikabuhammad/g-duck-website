@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  basePath: '/g-duck-website',
   reactStrictMode: true,
   images: {
     formats: ['image/webp'],
