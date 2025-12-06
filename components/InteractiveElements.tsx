@@ -4,58 +4,39 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './InteractiveElements.module.css'
 
-// Generate soft, realistic duck quack sound using Web Audio API
-function playQuackSound() {
-  try {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-    
-    // Create a soft, gentle quack sound
-    const createSoftQuack = (freq: number, startTime: number, duration: number, volume: number) => {
-      const osc = audioContext.createOscillator()
-      const gain = audioContext.createGain()
-      
-      // Use sine wave for softer sound
-      osc.type = 'sine'
-      
-      // Gentle frequency modulation for natural quack
-      osc.frequency.setValueAtTime(freq, startTime)
-      osc.frequency.linearRampToValueAtTime(freq * 0.85, startTime + duration * 0.2)
-      osc.frequency.linearRampToValueAtTime(freq * 1.1, startTime + duration * 0.5)
-      osc.frequency.linearRampToValueAtTime(freq * 0.9, startTime + duration * 0.7)
-      osc.frequency.linearRampToValueAtTime(freq * 0.75, startTime + duration)
-      
-      // Soft volume envelope
-      gain.gain.setValueAtTime(0, startTime)
-      gain.gain.linearRampToValueAtTime(volume, startTime + 0.02)
-      gain.gain.linearRampToValueAtTime(volume * 0.8, startTime + duration * 0.4)
-      gain.gain.exponentialRampToValueAtTime(volume * 0.3, startTime + duration * 0.7)
-      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration)
-      
-      osc.connect(gain)
-      gain.connect(audioContext.destination)
-      
-      osc.start(startTime)
-      osc.stop(startTime + duration)
-    }
-    
-    const now = audioContext.currentTime
-    
-    // Create soft, layered quack sound
-    createSoftQuack(280, now, 0.2, 0.15)        // Main soft quack (lower frequency)
-    createSoftQuack(320, now + 0.03, 0.18, 0.1) // Gentle harmonic
-    createSoftQuack(240, now + 0.05, 0.15, 0.08) // Lower harmonic for depth
-    
-  } catch (error) {
-    // Fallback: silent if Web Audio API not supported
-    console.log('Audio not supported')
-  }
-}
+// Sound logic removed
 
 export default function InteractiveElements() {
   const [footprints, setFootprints] = useState<Array<{ id: number; x: number; y: number }>>([])
-  const [soundEnabled, setSoundEnabled] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [soundEnabled, setSoundEnabled] = useState(false)
+
+  const playQuackSound = useCallback(() => {
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext
+      if (!AudioContext) return
+
+      const ctx = new AudioContext()
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+
+      osc.type = 'triangle'
+      osc.frequency.setValueAtTime(300, ctx.currentTime)
+      osc.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.1)
+
+      gain.gain.setValueAtTime(0.1, ctx.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1)
+
+      osc.start()
+      osc.stop(ctx.currentTime + 0.1)
+    } catch (e) {
+      console.error('Audio play failed', e)
+    }
+  }, [])
 
   useEffect(() => {
     // Detect mobile
@@ -74,29 +55,27 @@ export default function InteractiveElements() {
         const y = window.scrollY + Math.random() * 200
         const footprintId = Date.now()
         setFootprints((prev) => [...prev, { id: footprintId, x, y }])
-        
+
         setTimeout(() => {
           setFootprints((prev) => prev.filter((fp) => fp.id !== footprintId))
         }, 3000)
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [footprints.length])
 
-  // Removed balloons - just play sound on click
   const handlePageClick = useCallback((e: MouseEvent) => {
     // Don't play sound when clicking on interactive elements
     const target = e.target as HTMLElement
     if (target.closest('button, a, input, select, textarea') || target.closest('[role="button"]')) {
       return
     }
-    
+
     if (soundEnabled) {
       playQuackSound()
     }
-  }, [soundEnabled])
+  }, [soundEnabled, playQuackSound])
 
   useEffect(() => {
     document.addEventListener('click', handlePageClick)
@@ -104,6 +83,8 @@ export default function InteractiveElements() {
       document.removeEventListener('click', handlePageClick)
     }
   }, [handlePageClick])
+
+
 
   return (
     <>
@@ -145,7 +126,7 @@ export default function InteractiveElements() {
             drag={!isMobile}
             dragConstraints={{ left: -200, right: 200, top: -200, bottom: 200 }}
             dragElastic={0.7}
-            whileHover={{ 
+            whileHover={{
               scale: 1.2,
               rotate: [0, -10, 10, -10, 0],
             }}
@@ -175,7 +156,7 @@ export default function InteractiveElements() {
             drag={!isMobile}
             dragConstraints={{ left: -200, right: 200, top: -200, bottom: 200 }}
             dragElastic={0.7}
-            whileHover={{ 
+            whileHover={{
               scale: 1.2,
               rotate: [0, 10, -10, 10, 0],
             }}
@@ -229,7 +210,8 @@ export default function InteractiveElements() {
             duration: 0.5,
             repeat: soundEnabled ? Infinity : 0,
             ease: "easeInOut",
-          },
+            delay: 0
+          }
         }}
       >
         {soundEnabled ? '🔊' : '🔇'}
@@ -237,4 +219,3 @@ export default function InteractiveElements() {
     </>
   )
 }
-

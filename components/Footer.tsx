@@ -10,7 +10,7 @@ export default function Footer() {
             <p className={styles.tagline}>بطبوط يقود المرح ✨</p>
             <p className={styles.subtagline}>Toys. Style. Childhood magic.</p>
           </div>
-          
+
           <div className={styles.linksSection}>
             <div className={styles.linkGroup}>
               <h4 className={styles.linkTitle}>Quick Links</h4>
@@ -20,17 +20,26 @@ export default function Footer() {
                 <li><a href="#about">About</a></li>
               </ul>
             </div>
-            
+
             <div className={styles.linkGroup}>
               <h4 className={styles.linkTitle}>Connect</h4>
               <ul className={styles.links}>
                 <li>
-                  <a 
-                    href="https://instagram.com/g.duckjordan" 
-                    target="_blank" 
+                  <a
+                    href="https://www.instagram.com/g.duckjordan/"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://web.facebook.com/profile.php?id=61580446164533"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Facebook
                   </a>
                 </li>
                 <li>
@@ -40,7 +49,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
         <div className={styles.footerBottom}>
           <p className={styles.copyright}>
             © {new Date().getFullYear()} G.Duck Jordan. All rights reserved.

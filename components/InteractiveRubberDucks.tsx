@@ -37,22 +37,7 @@ export default function InteractiveRubberDucks() {
         }))
     })
 
-    // Sound effect
-    const playQuack = () => {
-        // Try to use speech synthesis as a reliable fallback
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance('Quack')
-            utterance.pitch = 1.5 + Math.random() * 0.5 // Varied pitch
-            utterance.rate = 1.5
-            utterance.volume = 0.5
-            window.speechSynthesis.speak(utterance)
-        }
 
-        // Also try to play a sound file if it exists (implementing for future extensibility)
-        const audio = new Audio('/sounds/quack.mp3')
-        audio.volume = 0.3
-        audio.play().catch(() => {/* Ignore errors if file missing */ })
-    }
 
     return (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5 }}>
@@ -61,14 +46,13 @@ export default function InteractiveRubberDucks() {
                     key={duck.id}
                     duck={duck}
                     isMobile={isMobile}
-                    onQuack={playQuack}
                 />
             ))}
         </div>
     )
 }
 
-function RubberDuck({ duck, isMobile, onQuack }: { duck: Duck, isMobile: boolean, onQuack: () => void }) {
+function RubberDuck({ duck, isMobile }: { duck: Duck, isMobile: boolean }) {
     return (
         <motion.div
             style={{
@@ -89,9 +73,7 @@ function RubberDuck({ duck, isMobile, onQuack }: { duck: Duck, isMobile: boolean
                 zIndex: 1000,
             } : {}}
             whileTap={{ scale: 0.9 }}
-            onClick={() => {
-                onQuack()
-            }}
+
             animate={{
                 y: [0, -30, 0],
                 x: [0, 10, 0, -10, 0],
