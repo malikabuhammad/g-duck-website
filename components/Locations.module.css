@@ -1,0 +1,116 @@
+.section {
+  padding: 80px 0;
+  background-color: var(--white);
+}
+
+.title {
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--black);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: clamp(16px, 3vw, 20px);
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 50px;
+}
+
+.locationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.locationCard {
+  background: var(--white);
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.locationCard:hover,
+.locationCard.hovered {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-large);
+  border-color: var(--yellow);
+}
+
+.iconContainer {
+  display: inline-block;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.locationCard:hover .iconContainer,
+.locationCard.hovered .iconContainer {
+  animation: bounce 0.6s ease;
+}
+
+.locationName {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 15px;
+}
+
+.address {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+
+.phone {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+
+.hours {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.directionsButton {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: var(--yellow);
+  color: var(--black);
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.directionsButton:hover {
+  background-color: var(--black);
+  color: var(--yellow);
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .locationsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .locationCard {
+    padding: 25px;
+  }
+}
+

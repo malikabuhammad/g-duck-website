@@ -1,0 +1,191 @@
+.section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9E6 50%, #FFFFFF 100%);
+}
+
+.title {
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--black);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: clamp(18px, 3.5vw, 24px);
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto 60px;
+  padding: 20px 0;
+}
+
+.timelineItem {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 40px;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover,
+.timelineItem.active {
+  transform: translateX(5px);
+}
+
+.timelineMarker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.markerDot {
+  width: 20px;
+  height: 20px;
+  background-color: var(--yellow);
+  border: 4px solid var(--white);
+  border-radius: 50%;
+  box-shadow: var(--shadow-medium);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover .markerDot,
+.timelineItem.active .markerDot {
+  transform: scale(1.2);
+  background-color: var(--black);
+}
+
+.timelineLine {
+  width: 3px;
+  height: calc(100% + 40px);
+  background: linear-gradient(to bottom, var(--yellow), rgba(255, 214, 0, 0.3));
+  margin-top: 20px;
+  border-radius: 2px;
+}
+
+.timelineContent {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.timelineItem:hover .timelineContent,
+.timelineItem.active .timelineContent {
+  box-shadow: var(--shadow-large);
+  border-color: var(--yellow);
+  transform: translateY(-2px);
+}
+
+.sticker {
+  display: inline-block;
+  background-color: var(--yellow);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: var(--shadow-soft);
+}
+
+.date {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.eventTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+
+.eventDescription {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.6;
+}
+
+.mission {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.missionCard {
+  background: var(--white);
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: var(--shadow-medium);
+  text-align: center;
+  border: 3px solid var(--yellow);
+}
+
+.missionTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+.missionText {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.8;
+}
+
+.brandImageContainer {
+  margin-top: 60px;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: var(--shadow-large);
+  border: 4px solid var(--black);
+  position: relative;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brandImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.brandImageContainer:hover .brandImage {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .timelineItem {
+    padding-left: 50px;
+  }
+
+  .timelineContent {
+    padding: 20px;
+  }
+
+  .missionCard {
+    padding: 30px 20px;
+  }
+
+  .missionText {
+    font-size: 16px;
+  }
+}

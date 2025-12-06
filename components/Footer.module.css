@@ -1,0 +1,107 @@
+.footer {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 60px 0 30px;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.brandSection {
+  text-align: left;
+}
+
+.brandName {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--yellow);
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: var(--white);
+}
+
+.subtagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.linksSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.linkGroup {
+  text-align: left;
+}
+
+.linkTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-bottom: 15px;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+}
+
+.links li {
+  margin-bottom: 10px;
+}
+
+.links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: var(--yellow);
+}
+
+.footerBottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 20px;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .linksSection {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .brandSection {
+    text-align: center;
+  }
+  
+  .linkGroup {
+    text-align: center;
+  }
+}
+
