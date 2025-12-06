@@ -1,9 +1,11 @@
 const isProd = process.env.NODE_ENV === 'production'
+const repoName = '/g-duck-website'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: isProd ? '/g-duck-website' : '',
+  basePath: isProd ? repoName : '',
+  assetPrefix: isProd ? repoName : '',
   reactStrictMode: true,
   images: {
     formats: ['image/webp'],
