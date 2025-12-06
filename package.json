@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d out",
+    "deploy:check": "node -e \"console.log('Note: GitHub Pages sites are public. Private repo publishing requires an appropriate GitHub plan or org settings.')\""
   },
   "dependencies": {
     "framer-motion": "^10.16.16",
@@ -25,4 +26,3 @@
   },
   "homepage": "https://malikabuhammad.github.io/g-duck-website"
 }
-
